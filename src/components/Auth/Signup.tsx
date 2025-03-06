@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { UserPlus, Mail, Lock, Building, ArrowLeft, Check, AlertCircle } from 'lucide-react';
+import { UserPlus, Mail, Lock, Building, ArrowLeft, Check, AlertCircle, User } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '../../lib/supabaseClient';
 
@@ -11,6 +11,8 @@ const Signup = () => {
   const [success, setSuccess] = useState(false);
   const [formData, setFormData] = useState({
     company: '',
+    firstName: '',
+    lastName: '',
     email: '',
     password: '',
   });
@@ -29,10 +31,17 @@ const Signup = () => {
     setSuccess(false);
 
     try {
-      // 1. Create user account
+      // 1. Create user account with metadata
       const { data: authData, error: authError } = await supabase.auth.signUp({
         email: formData.email,
         password: formData.password,
+        options: {
+          data: {
+            first_name: formData.firstName,
+            last_name: formData.lastName,
+            full_name: `${formData.firstName} ${formData.lastName}`,
+          }
+        }
       });
 
       if (authError) throw authError;
@@ -61,6 +70,8 @@ const Signup = () => {
               id: authData.user.id,
               organization_id: orgData.id,
               role: 'admin',
+              first_name: formData.firstName,
+              last_name: formData.lastName,
               is_active: true,
             },
           ]);
@@ -170,6 +181,46 @@ const Signup = () => {
                   className="appearance-none rounded-lg relative block w-full pl-10 pr-3 py-2 border border-secondary-300 placeholder-secondary-500 text-secondary-900 focus:outline-none focus:ring-primary-500 focus:border-primary-500 focus:z-10 sm:text-sm"
                   placeholder="Company Name"
                 />
+              </div>
+            </div>
+
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <label htmlFor="firstName" className="sr-only">
+                  First Name
+                </label>
+                <div className="relative">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <User className="h-5 w-5 text-secondary-400" />
+                  </div>
+                  <input
+                    id="firstName"
+                    name="firstName"
+                    type="text"
+                    required
+                    value={formData.firstName}
+                    onChange={handleChange}
+                    className="appearance-none rounded-lg relative block w-full pl-10 pr-3 py-2 border border-secondary-300 placeholder-secondary-500 text-secondary-900 focus:outline-none focus:ring-primary-500 focus:border-primary-500 focus:z-10 sm:text-sm"
+                    placeholder="First Name"
+                  />
+                </div>
+              </div>
+              <div>
+                <label htmlFor="lastName" className="sr-only">
+                  Last Name
+                </label>
+                <div className="relative">
+                  <input
+                    id="lastName"
+                    name="lastName"
+                    type="text"
+                    required
+                    value={formData.lastName}
+                    onChange={handleChange}
+                    className="appearance-none rounded-lg relative block w-full pl-3 pr-3 py-2 border border-secondary-300 placeholder-secondary-500 text-secondary-900 focus:outline-none focus:ring-primary-500 focus:border-primary-500 focus:z-10 sm:text-sm"
+                    placeholder="Last Name"
+                  />
+                </div>
               </div>
             </div>
 

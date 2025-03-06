@@ -27,6 +27,7 @@ import {
   Key
 } from 'lucide-react';
 import { supabase } from '../../lib/supabaseClient';
+import { useAuth } from '../Auth/AuthContext';
 
 // Define navigation structure
 const navigationItems = [
@@ -125,10 +126,33 @@ const quickAccessItems = [
 
 const DashboardLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const navigate = useNavigate();
+  const { user } = useAuth();
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [expandedSection, setExpandedSection] = useState<string | null>(null);
+  const [userDisplayName, setUserDisplayName] = useState('');
+
+  useEffect(() => {
+    // Get user's name or use email as fallback
+    if (user) {
+      // Check if we can get name from user metadata
+      const metadata = user.user_metadata;
+      if (metadata && (metadata.first_name || metadata.full_name || metadata.name)) {
+        setUserDisplayName(metadata.full_name || metadata.name || metadata.first_name);
+      } else {
+        // Extract username from email (remove @domain.com part)
+        const emailName = user.email ? user.email.split('@')[0] : '';
+        // Format the email name (capitalize first letter of each word)
+        const formattedName = emailName
+          .split(/[._-]/)
+          .map(part => part.charAt(0).toUpperCase() + part.slice(1))
+          .join(' ');
+        
+        setUserDisplayName(formattedName);
+      }
+    }
+  }, [user]);
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
@@ -265,6 +289,14 @@ const DashboardLayout: React.FC<{ children: React.ReactNode }> = ({ children }) 
             </div>
 
             <div className="flex items-center space-x-4">
+              <div className="flex-1 flex items-center justify-end">
+                <div className="hidden md:block mr-4">
+                  <span className="text-secondary-700">
+                    Welcome, <span className="font-medium">{userDisplayName}</span>
+                  </span>
+                </div>
+              </div>
+
               <div className="relative">
                 <button
                   onClick={() => setIsNotificationsOpen(!isNotificationsOpen)}
@@ -312,12 +344,10 @@ const DashboardLayout: React.FC<{ children: React.ReactNode }> = ({ children }) 
                   onClick={() => setIsProfileOpen(!isProfileOpen)}
                   className="flex items-center space-x-3"
                 >
-                  <img
-                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=facearea&facepad=2&w=48&h=48&q=80"
-                    alt="Profile"
-                    className="h-8 w-8 rounded-full"
-                  />
-                  <span className="text-sm font-medium text-secondary-700">John Smith</span>
+                  <div className="h-8 w-8 rounded-full bg-primary-600 flex items-center justify-center text-white text-sm font-medium">
+                    {userDisplayName.charAt(0)}
+                  </div>
+                  <span className="text-sm font-medium text-secondary-700">{userDisplayName || user?.email || 'User'}</span>
                   <ChevronDown className="h-4 w-4 text-secondary-400" />
                 </button>
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { 
   Battery, 
   AlertTriangle, 
@@ -26,8 +26,33 @@ import {
   AreaChart,
   Area
 } from 'recharts';
+import { useAuth } from '../Auth/AuthContext';
 
 const DashboardHome = () => {
+  const { user } = useAuth();
+  const [userDisplayName, setUserDisplayName] = useState('');
+  
+  useEffect(() => {
+    // Get user's name or use email as fallback
+    if (user) {
+      // Check if we can get name from user metadata
+      const metadata = user.user_metadata;
+      if (metadata && (metadata.first_name || metadata.full_name || metadata.name)) {
+        setUserDisplayName(metadata.full_name || metadata.name || metadata.first_name);
+      } else {
+        // Extract username from email (remove @domain.com part)
+        const emailName = user.email ? user.email.split('@')[0] : '';
+        // Format the email name (capitalize first letter of each word)
+        const formattedName = emailName
+          .split(/[._-]/)
+          .map(part => part.charAt(0).toUpperCase() + part.slice(1))
+          .join(' ');
+        
+        setUserDisplayName(formattedName);
+      }
+    }
+  }, [user]);
+
   const stats = [
     {
       title: "Active Stations",
