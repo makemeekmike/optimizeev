@@ -30,10 +30,13 @@ import SupportView from './components/Dashboard/SupportView';
 import AboutUs from './components/AboutUs';
 import Contact from './components/Contact';
 import LearnMore from './components/LearnMore';
+import AdminLayout from './components/Admin/AdminLayout';
 
 // Import Monitoring components
 import NetworkOverview from './components/Dashboard/Monitoring/NetworkOverview';
+import StationMap from './components/Dashboard/Monitoring/StationMap';
 import ActiveSessions from './components/Dashboard/Monitoring/ActiveSessions';
+import RealTimeAlerts from './components/Dashboard/Monitoring/RealTimeAlerts';
 import PerformanceMetrics from './components/Dashboard/Monitoring/PerformanceMetrics';
 
 // Import Stations components
@@ -58,8 +61,27 @@ const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) =
     );
   }
   
-  if (user) {
+  if (!user) {
     return <Navigate to="/login" />;
+  }
+  
+  return <>{children}</>;
+};
+
+// Public Route Component (redirects to dashboard if already authenticated)
+const PublicRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const { user, loading } = useAuth();
+  
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary-600"></div>
+      </div>
+    );
+  }
+  
+  if (user) {
+    return <Navigate to="/dashboard" />;
   }
   
   return <>{children}</>;
@@ -87,8 +109,20 @@ const App = () => {
               <LiveChat />
             </MainLayout>
           } />
-          <Route path="/login" element={<MainLayout><Login /></MainLayout>} />
-          <Route path="/signup" element={<MainLayout><Signup /></MainLayout>} />
+          <Route path="/login" element={
+            <PublicRoute>
+              <MainLayout>
+                <Login />
+              </MainLayout>
+            </PublicRoute>
+          } />
+          <Route path="/signup" element={
+            <PublicRoute>
+              <MainLayout>
+                <Signup />
+              </MainLayout>
+            </PublicRoute>
+          } />
           <Route path="/request-demo" element={<MainLayout><RequestDemo /></MainLayout>} />
           <Route path="/learn-more" element={<MainLayout><LearnMore /></MainLayout>} />
           <Route path="/about" element={<MainLayout><AboutUs /></MainLayout>} />
@@ -112,10 +146,24 @@ const App = () => {
               </DashboardLayout>
             </ProtectedRoute>
           } />
+          <Route path="/dashboard/monitoring/map" element={
+            <ProtectedRoute>
+              <DashboardLayout>
+                <StationMap />
+              </DashboardLayout>
+            </ProtectedRoute>
+          } />
           <Route path="/dashboard/monitoring/sessions" element={
             <ProtectedRoute>
               <DashboardLayout>
                 <ActiveSessions />
+              </DashboardLayout>
+            </ProtectedRoute>
+          } />
+          <Route path="/dashboard/monitoring/alerts" element={
+            <ProtectedRoute>
+              <DashboardLayout>
+                <RealTimeAlerts />
               </DashboardLayout>
             </ProtectedRoute>
           } />
@@ -231,6 +279,16 @@ const App = () => {
               </DashboardLayout>
             </ProtectedRoute>
           } />
+
+          {/* Protected Admin Routes */}
+          <Route path="/admin" element={
+            <ProtectedRoute>
+              <AdminLayout />
+            </ProtectedRoute>
+          } />
+
+          {/* Catch all route */}
+          <Route path="*" element={<Navigate to="/dashboard" />} />
         </Routes>
       </AuthProvider>
     </Router>

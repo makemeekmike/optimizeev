@@ -1,15 +1,121 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { UserPlus, Mail, Lock, Building, ArrowLeft } from 'lucide-react';
+import { UserPlus, Mail, Lock, Building, ArrowLeft, Check, AlertCircle } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { supabase } from '../../lib/supabaseClient';
 
 const Signup = () => {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState(false);
+  const [formData, setFormData] = useState({
+    company: '',
+    email: '',
+    password: '',
+  });
 
-  const handleSignup = (e: React.FormEvent) => {
-    e.preventDefault();
-    navigate('/dashboard');
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
   };
+
+  const handleSignup = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setError(null);
+    setSuccess(false);
+
+    try {
+      // 1. Create user account
+      const { data: authData, error: authError } = await supabase.auth.signUp({
+        email: formData.email,
+        password: formData.password,
+      });
+
+      if (authError) throw authError;
+
+      if (authData.user) {
+        // 2. Create organization record
+        const { data: orgData, error: orgError } = await supabase
+          .from('organizations')
+          .insert([
+            {
+              name: formData.company,
+              contact_email: formData.email,
+              subscription_tier: 'basic',
+            },
+          ])
+          .select()
+          .single();
+
+        if (orgError) throw orgError;
+
+        // 3. Create user profile with organization link
+        const { error: profileError } = await supabase
+          .from('users')
+          .insert([
+            {
+              id: authData.user.id,
+              organization_id: orgData.id,
+              role: 'admin',
+              is_active: true,
+            },
+          ]);
+
+        if (profileError) throw profileError;
+
+        // 4. Show success message
+        setSuccess(true);
+      }
+    } catch (error: any) {
+      setError(error.message || 'An error occurred during signup');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (success) {
+    return (
+      <div className="min-h-screen bg-secondary-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="max-w-md w-full space-y-8 bg-white p-8 rounded-xl shadow-lg"
+        >
+          <div className="text-center">
+            <div className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100">
+              <Check className="h-6 w-6 text-green-600" />
+            </div>
+            <h2 className="mt-6 text-center text-3xl font-extrabold text-secondary-900">
+              Account Created!
+            </h2>
+            <div className="mt-6 text-center text-md text-secondary-600">
+              <p>We've sent a confirmation link to <span className="font-medium">{formData.email}</span></p>
+              <p className="mt-2">Please check your email and click the link to activate your account.</p>
+            </div>
+          </div>
+          
+          <div className="mt-6 bg-blue-50 border border-blue-200 text-blue-700 px-4 py-3 rounded-lg">
+            <p className="text-sm">
+              <span className="font-bold">Important:</span> You must verify your email before you can log in.
+            </p>
+          </div>
+
+          <div className="mt-6">
+            <button
+              onClick={() => navigate('/login')}
+              className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
+            >
+              Go to Login
+            </button>
+          </div>
+        </motion.div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-secondary-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
@@ -37,6 +143,13 @@ const Signup = () => {
           </p>
         </div>
 
+        {error && (
+          <div className="bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-lg flex items-start">
+            <AlertCircle className="h-5 w-5 mr-2 flex-shrink-0 mt-0.5" />
+            <span>{error}</span>
+          </div>
+        )}
+
         <form className="mt-8 space-y-6" onSubmit={handleSignup}>
           <div className="rounded-md shadow-sm space-y-4">
             <div>
@@ -51,6 +164,9 @@ const Signup = () => {
                   id="company"
                   name="company"
                   type="text"
+                  required
+                  value={formData.company}
+                  onChange={handleChange}
                   className="appearance-none rounded-lg relative block w-full pl-10 pr-3 py-2 border border-secondary-300 placeholder-secondary-500 text-secondary-900 focus:outline-none focus:ring-primary-500 focus:border-primary-500 focus:z-10 sm:text-sm"
                   placeholder="Company Name"
                 />
@@ -69,6 +185,9 @@ const Signup = () => {
                   id="email"
                   name="email"
                   type="email"
+                  required
+                  value={formData.email}
+                  onChange={handleChange}
                   className="appearance-none rounded-lg relative block w-full pl-10 pr-3 py-2 border border-secondary-300 placeholder-secondary-500 text-secondary-900 focus:outline-none focus:ring-primary-500 focus:border-primary-500 focus:z-10 sm:text-sm"
                   placeholder="Email address"
                 />
@@ -87,6 +206,9 @@ const Signup = () => {
                   id="password"
                   name="password"
                   type="password"
+                  required
+                  value={formData.password}
+                  onChange={handleChange}
                   className="appearance-none rounded-lg relative block w-full pl-10 pr-3 py-2 border border-secondary-300 placeholder-secondary-500 text-secondary-900 focus:outline-none focus:ring-primary-500 focus:border-primary-500 focus:z-10 sm:text-sm"
                   placeholder="Password"
                 />
@@ -97,12 +219,13 @@ const Signup = () => {
           <div>
             <button
               type="submit"
-              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
+              disabled={loading}
+              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <span className="absolute left-0 inset-y-0 flex items-center pl-3">
                 <UserPlus className="h-5 w-5 text-primary-500 group-hover:text-primary-400" />
               </span>
-              Create account
+              {loading ? 'Creating account...' : 'Create account'}
             </button>
           </div>
         </form>

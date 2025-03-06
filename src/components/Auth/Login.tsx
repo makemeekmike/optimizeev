@@ -1,14 +1,72 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { LogIn, Mail, Lock, ArrowLeft } from 'lucide-react';
+import { Mail, Lock, ArrowLeft, LogIn, AlertCircle } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { supabase } from '../../lib/supabaseClient';
 
 const Login = () => {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [emailNotConfirmed, setEmailNotConfirmed] = useState(false);
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+  });
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleResendConfirmation = async () => {
+    setLoading(true);
+    try {
+      const { error } = await supabase.auth.resend({
+        type: 'signup',
+        email: formData.email,
+      });
+      
+      if (error) throw error;
+      
+      setError('Confirmation email resent. Please check your inbox.');
+    } catch (error: any) {
+      setError(error.message || 'Failed to resend confirmation email');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    navigate('/dashboard');
+    setLoading(true);
+    setError(null);
+    setEmailNotConfirmed(false);
+
+    try {
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email: formData.email,
+        password: formData.password,
+      });
+
+      if (error) {
+        if (error.message.includes('email not confirmed') || error.code === 'email_not_confirmed') {
+          setEmailNotConfirmed(true);
+          throw new Error('Your email has not been confirmed yet. Please check your inbox for a confirmation link.');
+        }
+        throw error;
+      }
+
+      if (data.user) {
+        navigate('/dashboard');
+      }
+    } catch (error: any) {
+      setError(error.message || 'An error occurred during login');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -33,9 +91,29 @@ const Login = () => {
             Sign in to your account
           </h2>
           <p className="mt-2 text-center text-sm text-secondary-600">
-            Access your OptimizeEV dashboard
+            Access your EV charging infrastructure dashboard
           </p>
         </div>
+
+        {error && (
+          <div className="bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-lg flex items-start">
+            <AlertCircle className="h-5 w-5 mr-2 flex-shrink-0 mt-0.5" />
+            <span>{error}</span>
+          </div>
+        )}
+
+        {emailNotConfirmed && (
+          <div className="bg-yellow-50 border border-yellow-200 text-yellow-700 px-4 py-3 rounded-lg">
+            <p className="mb-2">Your email has not been confirmed yet. Please check your inbox for a confirmation link.</p>
+            <button
+              onClick={handleResendConfirmation}
+              disabled={loading}
+              className="text-sm font-medium text-primary-600 hover:text-primary-500 disabled:opacity-50"
+            >
+              {loading ? 'Sending...' : 'Resend confirmation email'}
+            </button>
+          </div>
+        )}
 
         <form className="mt-8 space-y-6" onSubmit={handleLogin}>
           <div className="rounded-md shadow-sm space-y-4">
@@ -51,6 +129,9 @@ const Login = () => {
                   id="email"
                   name="email"
                   type="email"
+                  required
+                  value={formData.email}
+                  onChange={handleChange}
                   className="appearance-none rounded-lg relative block w-full pl-10 pr-3 py-2 border border-secondary-300 placeholder-secondary-500 text-secondary-900 focus:outline-none focus:ring-primary-500 focus:border-primary-500 focus:z-10 sm:text-sm"
                   placeholder="Email address"
                 />
@@ -69,6 +150,9 @@ const Login = () => {
                   id="password"
                   name="password"
                   type="password"
+                  required
+                  value={formData.password}
+                  onChange={handleChange}
                   className="appearance-none rounded-lg relative block w-full pl-10 pr-3 py-2 border border-secondary-300 placeholder-secondary-500 text-secondary-900 focus:outline-none focus:ring-primary-500 focus:border-primary-500 focus:z-10 sm:text-sm"
                   placeholder="Password"
                 />
@@ -99,12 +183,13 @@ const Login = () => {
           <div>
             <button
               type="submit"
-              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
+              disabled={loading}
+              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <span className="absolute left-0 inset-y-0 flex items-center pl-3">
                 <LogIn className="h-5 w-5 text-primary-500 group-hover:text-primary-400" />
               </span>
-              Sign in
+              {loading ? 'Signing in...' : 'Sign in'}
             </button>
           </div>
         </form>

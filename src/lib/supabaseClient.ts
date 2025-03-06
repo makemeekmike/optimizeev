@@ -7,13 +7,13 @@ const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || 'eyJhbGciOiJIU
 export const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 // Add a connection check that provides helpful feedback
-supabase.auth.getSession().then(({ data: { session } }) => {
-  if (session) {
-    console.log('Supabase connection successful');
-  } else {
-    console.info('Please click the "Connect to Supabase" button to set up your database connection.');
-  }
-}).catch((error) => {
-  console.warn('Supabase connection not configured:', error.message);
-  console.info('Please click the "Connect to Supabase" button to set up your database connection.');
-});
+// supabase.auth.getSession().then(({ data: { session } }) => {
+//   if (session) {
+//     console.log('Supabase connection successful');
+//   } else {
+//     console.info('Please click the "Connect to Supabase" button to set up your database connection.');
+//   }
+// }).catch((error) => {
+//   console.warn('Supabase connection not configured:', error.message);
+//   console.info('Please click the "Connect to Supabase" button to set up your database connection.');
+// });

@@ -18,7 +18,7 @@ import {
 } from 'lucide-react';
 import { supabase } from '../../lib/supabaseClient';
 
-const AdminLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+const AdminLayout: React.FC<{ children?: React.ReactNode }> = ({ children }) => {
   const navigate = useNavigate();
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
@@ -246,7 +246,7 @@ const AdminLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 
         {/* Main Content Area */}
         <main className="pt-20 p-6">
-          {children}
+          {children || <div className="p-8 text-center text-lg text-secondary-600">Admin Dashboard Home</div>}
         </main>
       </div>
     </div>
