@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { 
   LayoutDashboard, 
   Activity,
@@ -193,9 +193,15 @@ const DashboardLayout: React.FC<{ children: React.ReactNode }> = ({ children }) 
       >
         <div className="p-4 border-b border-secondary-200">
           <div className="flex items-center">
-            <Battery className="h-8 w-8 text-primary-600" />
+            
             {isSidebarOpen && (
-              <span className="ml-2 text-xl font-bold text-primary-600">OptimizeEV</span>
+              <Link to="/" >
+              <img 
+                src="https://res.cloudinary.com/dork9pzwh/image/upload/v1741345557/optimizeevdetroit_logo_ozpnxb.jpg" 
+                alt="OptimizeEV Logo" 
+                className="h-8" 
+              />
+            </Link>
             )}
           </div>
         </div>

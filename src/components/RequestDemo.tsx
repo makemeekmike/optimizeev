@@ -9,16 +9,10 @@ import {
   ArrowLeft
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { InlineWidget } from 'react-calendly';
 
 const RequestDemo = () => {
   const navigate = useNavigate();
-  const [submitted, setSubmitted] = useState(false);
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setSubmitted(true);
-    // Here you would typically handle the form submission
-  };
 
   return (
     <div className="min-h-screen bg-secondary-50">
@@ -115,101 +109,23 @@ const RequestDemo = () => {
             </div>
           </motion.div>
 
-          {/* Right Column - Form */}
+          {/* Right Column - Replace form with Calendly */}
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
             className="bg-white rounded-2xl shadow-lg p-8"
           >
-            {submitted ? (
-              <div className="text-center py-12">
-                <div className="bg-primary-100 p-4 rounded-full inline-block mb-4">
-                  <CheckCircle className="h-12 w-12 text-primary-600" />
-                </div>
-                <h2 className="text-2xl font-bold text-secondary-900 mb-4">
-                  Thank You!
-                </h2>
-                <p className="text-secondary-600">
-                  We've received your demo request. Our team will contact you within 24 hours to schedule your personalized demo.
-                </p>
-              </div>
-            ) : (
-              <>
-                <h2 className="text-2xl font-bold text-secondary-900 mb-6">
-                  Request Your Demo
-                </h2>
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div>
-                    <label className="block text-sm font-medium text-secondary-700 mb-2">
-                      Full Name
-                    </label>
-                    <input
-                      type="text"
-                      required
-                      className="w-full px-4 py-2 border border-secondary-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-secondary-700 mb-2">
-                      Business Email
-                    </label>
-                    <input
-                      type="email"
-                      required
-                      className="w-full px-4 py-2 border border-secondary-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-secondary-700 mb-2">
-                      Company Name
-                    </label>
-                    <input
-                      type="text"
-                      required
-                      className="w-full px-4 py-2 border border-secondary-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-secondary-700 mb-2">
-                      Number of Charging Stations
-                    </label>
-                    <select
-                      required
-                      className="w-full px-4 py-2 border border-secondary-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                    >
-                      <option value="">Select range</option>
-                      <option value="1-10">1-10 stations</option>
-                      <option value="11-50">11-50 stations</option>
-                      <option value="51-100">51-100 stations</option>
-                      <option value="100+">100+ stations</option>
-                    </select>
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-secondary-700 mb-2">
-                      Message (Optional)
-                    </label>
-                    <textarea
-                      rows={4}
-                      className="w-full px-4 py-2 border border-secondary-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                      placeholder="Tell us about your specific needs or challenges..."
-                    ></textarea>
-                  </div>
-
-                  <button
-                    type="submit"
-                    className="w-full flex items-center justify-center space-x-2 bg-primary-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-primary-700 transition-colors"
-                  >
-                    <Send className="h-5 w-5" />
-                    <span>Request Demo</span>
-                  </button>
-                </form>
-              </>
-            )}
+            <h2 className="text-2xl font-bold text-secondary-900 mb-6">
+              Schedule Your Demo
+            </h2>
+            
+            <InlineWidget 
+              url="https://calendly.com/michael-xbigtech" 
+              styles={{
+                height: '630px'
+              }}
+            />
           </motion.div>
         </div>
       </div>
