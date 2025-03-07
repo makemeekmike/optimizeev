@@ -42,7 +42,7 @@ const Header = () => {
             >
               About
             </Link>
-            <button
+            {/* <button
               onClick={() => handleNavigation('solutions')}
               className="text-secondary-600 hover:text-primary-600 px-3 py-2 text-sm font-medium"
             >
@@ -53,7 +53,7 @@ const Header = () => {
               className="text-secondary-600 hover:text-primary-600 px-3 py-2 text-sm font-medium"
             >
               Resources
-            </button>
+            </button> */}
             <Link
               to="/contact"
               className="text-secondary-600 hover:text-primary-600 px-3 py-2 text-sm font-medium"

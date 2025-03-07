@@ -22,7 +22,7 @@ const solutions = [
       "Predictive maintenance alerts",
       "Cost optimization insights"
     ],
-    image: "https://unsplash.com/photos/aerial-top-down-view-of-the-parking-lot-with-many-cars-of-supermarket-shoppers-in-the-city-grocery-store-xa_pKZWB2UM?auto=format&fit=crop&q=80"
+    image: "https://res.cloudinary.com/dork9pzwh/image/upload/v1741367877/premium_photo-1661963541387-46cc09b4bf7e_mq7hoa.jpg"
   },
   {
     title: "Charging Networks",
@@ -35,7 +35,7 @@ const solutions = [
       "Load balancing",
       "Revenue optimization"
     ],
-    image: "https://images.unsplash.com/photo-1696446702239-e76522785166?auto=format&fit=crop&q=80"
+    image: "https://res.cloudinary.com/dork9pzwh/image/upload/v1741368353/electric-car-charging_ishqvz.png_yoyatf.png"
   },
   {
     title: "Property Solutions",
@@ -48,7 +48,7 @@ const solutions = [
       "Revenue generation",
       "Energy management"
     ],
-    image: "https://images.unsplash.com/photo-1698675145323-0d8c837c4116?auto=format&fit=crop&q=80"
+    image: "https://res.cloudinary.com/dork9pzwh/image/upload/v1741369669/download_suypaj.jpg"
   },
   {
     title: "Public Infrastructure",
@@ -61,7 +61,7 @@ const solutions = [
       "Maintenance scheduling",
       "Compliance tracking"
     ],
-    image: "https://images.unsplash.com/photo-1697554401944-bea57cc38c19?auto=format&fit=crop&q=80"
+    image: "https://res.cloudinary.com/dork9pzwh/image/upload/v1741370306/download_l1bm3v.jpg"
   },
   {
     title: "OEM Integration",
@@ -74,7 +74,7 @@ const solutions = [
       "Brand integration",
       "Customer insights"
     ],
-    image: "https://images.unsplash.com/photo-1696446702239-e76522785166?auto=format&fit=crop&q=80"
+    image: "https://res.cloudinary.com/dork9pzwh/image/upload/v1741372819/pexels-photo-30956915.jpeg_fl3pom.jpg"
   }
 ];
 

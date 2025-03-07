@@ -101,11 +101,11 @@ const App = () => {
               <DashboardDemo />
               <ChargingMap />
               <ROICalculator />
-              <CaseStudies />
-              <Pricing />
+              {/* <CaseStudies /> */}
+              {/* <Pricing /> */}
               <Integrations />
-              <Resources />
-              <Documentation />
+              {/* <Resources />
+              <Documentation /> */}
               <LiveChat />
             </MainLayout>
           } />

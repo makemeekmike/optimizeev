@@ -111,7 +111,7 @@ const Integrations = () => {
             </motion.div>
           ))}
         </div>
-
+{/* 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -122,7 +122,7 @@ const Integrations = () => {
           <button className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700">
             View Full Integration Directory
           </button>
-        </motion.div>
+        </motion.div> */}
       </div>
     </section>
   );

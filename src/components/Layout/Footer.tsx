@@ -18,18 +18,6 @@ const Footer = () => {
       { name: 'Contact', href: '/contact' },
       { name: 'News & Media', href: '/news-media' }
     ],
-    solutions: [
-      { name: 'Fleet Management', href: '/solutions#fleet' },
-      { name: 'Predictive Maintenance', href: '/solutions#maintenance' },
-      { name: 'Analytics', href: '/solutions#analytics' },
-      { name: 'Integration', href: '/solutions#integration' }
-    ],
-    resources: [
-      { name: 'Documentation', href: '/docs' },
-      { name: 'Guides', href: '/guides' },
-      { name: 'Blog', href: '/blog' },
-      { name: 'Case Studies', href: '/case-studies' }
-    ],
     legal: [
       { name: 'Privacy', href: '/privacy' },
       { name: 'Terms', href: '/terms' },
@@ -41,7 +29,7 @@ const Footer = () => {
   return (
     <footer className="bg-secondary-900 text-white">
       <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8">
           {/* Brand and Contact */}
           <div className="lg:col-span-2">
             <div className="flex items-center mb-6">
@@ -73,43 +61,13 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Navigation */}
+          {/* Company Navigation */}
           <div>
             <h3 className="text-sm font-semibold text-white tracking-wider uppercase mb-4">
               Company
             </h3>
             <ul className="space-y-3">
               {navigation.company.map((item) => (
-                <li key={item.name}>
-                  <Link to={item.href} className="text-secondary-300 hover:text-white">
-                    {item.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="text-sm font-semibold text-white tracking-wider uppercase mb-4">
-              Solutions
-            </h3>
-            <ul className="space-y-3">
-              {navigation.solutions.map((item) => (
-                <li key={item.name}>
-                  <Link to={item.href} className="text-secondary-300 hover:text-white">
-                    {item.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="text-sm font-semibold text-white tracking-wider uppercase mb-4">
-              Resources
-            </h3>
-            <ul className="space-y-3">
-              {navigation.resources.map((item) => (
                 <li key={item.name}>
                   <Link to={item.href} className="text-secondary-300 hover:text-white">
                     {item.name}
@@ -138,7 +96,8 @@ const Footer = () => {
                 &copy; {new Date().getFullYear()} OptimizeEV. All rights reserved.
               </p>
               <div className="flex justify-center md:justify-start space-x-4 mt-2 md:mt-0">
-                {navigation.legal.map((item) => (
+                {/* Legal links could be uncommented if needed */}
+                {/* {navigation.legal.map((item) => (
                   <Link
                     key={item.name}
                     to={item.href}
@@ -146,7 +105,7 @@ const Footer = () => {
                   >
                     {item.name}
                   </Link>
-                ))}
+                ))} */}
               </div>
             </div>
           </div>
