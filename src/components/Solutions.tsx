@@ -22,7 +22,7 @@ const solutions = [
       "Predictive maintenance alerts",
       "Cost optimization insights"
     ],
-    image: "https://images.unsplash.com/photo-1697554401944-bea57cc38c19?auto=format&fit=crop&q=80"
+    image: "https://unsplash.com/photos/aerial-top-down-view-of-the-parking-lot-with-many-cars-of-supermarket-shoppers-in-the-city-grocery-store-xa_pKZWB2UM?auto=format&fit=crop&q=80"
   },
   {
     title: "Charging Networks",

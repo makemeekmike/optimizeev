@@ -42,42 +42,42 @@ const navigationItems = [
       { name: 'Recent Views', href: '/dashboard/recent' }
     ]
   },
-  {
-    name: 'Monitoring',
-    href: '/dashboard/monitoring',
-    icon: Activity,
-    subItems: [
-      { name: 'Network Overview', href: '/dashboard/monitoring/overview' },
-      { name: 'Station Map', href: '/dashboard/monitoring/map' },
-      { name: 'Active Sessions', href: '/dashboard/monitoring/sessions' },
-      { name: 'Real-time Alerts', href: '/dashboard/monitoring/alerts' },
-      { name: 'Performance Metrics', href: '/dashboard/monitoring/metrics' }
-    ]
-  },
-  {
-    name: 'Stations',
-    href: '/dashboard/stations',
-    icon: Battery,
-    subItems: [
-      { name: 'Station Directory', href: '/dashboard/stations' },
-      { name: 'Group Management', href: '/dashboard/stations/groups' },
-      { name: 'Configuration Templates', href: '/dashboard/stations/templates' },
-      { name: 'Maintenance Schedule', href: '/dashboard/stations/maintenance' },
-      { name: 'Connection Status', href: '/dashboard/stations/status' }
-    ]
-  },
-  {
-    name: 'Analytics',
-    href: '/dashboard/analytics',
-    icon: BarChart,
-    subItems: [
-      { name: 'Performance Dashboard', href: '/dashboard/analytics' },
-      { name: 'Custom Reports', href: '/dashboard/analytics/reports' },
-      { name: 'Data Explorer', href: '/dashboard/analytics/explorer' },
-      { name: 'Trends & Insights', href: '/dashboard/analytics/trends' },
-      { name: 'Cost Analysis', href: '/dashboard/analytics/costs' }
-    ]
-  },
+  // {
+  //   name: 'Monitoring',
+  //   href: '/dashboard/monitoring',
+  //   icon: Activity,
+  //   subItems: [
+  //     { name: 'Network Overview', href: '/dashboard/monitoring/overview' },
+  //     { name: 'Station Map', href: '/dashboard/monitoring/map' },
+  //     { name: 'Active Sessions', href: '/dashboard/monitoring/sessions' },
+  //     { name: 'Real-time Alerts', href: '/dashboard/monitoring/alerts' },
+  //     { name: 'Performance Metrics', href: '/dashboard/monitoring/metrics' }
+  //   ]
+  // },
+  // {
+  //   name: 'Stations',
+  //   href: '/dashboard/stations',
+  //   icon: Battery,
+  //   subItems: [
+  //     { name: 'Station Directory', href: '/dashboard/stations' },
+  //     { name: 'Group Management', href: '/dashboard/stations/groups' },
+  //     { name: 'Configuration Templates', href: '/dashboard/stations/templates' },
+  //     { name: 'Maintenance Schedule', href: '/dashboard/stations/maintenance' },
+  //     { name: 'Connection Status', href: '/dashboard/stations/status' }
+  //   ]
+  // },
+  // {
+  //   name: 'Analytics',
+  //   href: '/dashboard/analytics',
+  //   icon: BarChart,
+  //   subItems: [
+  //     { name: 'Performance Dashboard', href: '/dashboard/analytics' },
+  //     { name: 'Custom Reports', href: '/dashboard/analytics/reports' },
+  //     { name: 'Data Explorer', href: '/dashboard/analytics/explorer' },
+  //     { name: 'Trends & Insights', href: '/dashboard/analytics/trends' },
+  //     { name: 'Cost Analysis', href: '/dashboard/analytics/costs' }
+  //   ]
+  // },
   {
     name: 'Maintenance',
     href: '/dashboard/maintenance',
@@ -90,30 +90,30 @@ const navigationItems = [
       { name: 'Work Orders', href: '/dashboard/maintenance/orders' }
     ]
   },
-  {
-    name: 'Alerts',
-    href: '/dashboard/alerts',
-    icon: AlertTriangle,
-    subItems: [
-      { name: 'Active Alerts', href: '/dashboard/alerts' },
-      { name: 'Alert History', href: '/dashboard/alerts/history' },
-      { name: 'Configure Rules', href: '/dashboard/alerts/rules' },
-      { name: 'Notification Settings', href: '/dashboard/alerts/settings' },
-      { name: 'Escalation Policies', href: '/dashboard/alerts/escalation' }
-    ]
-  },
-  {
-    name: 'Administration',
-    href: '/dashboard/admin',
-    icon: Settings,
-    subItems: [
-      { name: 'User Management', href: '/dashboard/admin/users' },
-      { name: 'Role Configuration', href: '/dashboard/admin/roles' },
-      { name: 'Security Settings', href: '/dashboard/admin/security' },
-      { name: 'API Keys', href: '/dashboard/admin/api-keys' },
-      { name: 'Integration Setup', href: '/dashboard/admin/integrations' }
-    ]
-  }
+  // {
+  //   name: 'Alerts',
+  //   href: '/dashboard/alerts',
+  //   icon: AlertTriangle,
+  //   subItems: [
+  //     { name: 'Active Alerts', href: '/dashboard/alerts' },
+  //     { name: 'Alert History', href: '/dashboard/alerts/history' },
+  //     { name: 'Configure Rules', href: '/dashboard/alerts/rules' },
+  //     { name: 'Notification Settings', href: '/dashboard/alerts/settings' },
+  //     { name: 'Escalation Policies', href: '/dashboard/alerts/escalation' }
+  //   ]
+  // },
+  // {
+  //   name: 'Administration',
+  //   href: '/dashboard/admin',
+  //   icon: Settings,
+  //   subItems: [
+  //     { name: 'User Management', href: '/dashboard/admin/users' },
+  //     { name: 'Role Configuration', href: '/dashboard/admin/roles' },
+  //     { name: 'Security Settings', href: '/dashboard/admin/security' },
+  //     { name: 'API Keys', href: '/dashboard/admin/api-keys' },
+  //     { name: 'Integration Setup', href: '/dashboard/admin/integrations' }
+  //   ]
+  // }
 ];
 
 // Quick access items

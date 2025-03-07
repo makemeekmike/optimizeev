@@ -213,6 +213,13 @@ const App = () => {
               </DashboardLayout>
             </ProtectedRoute>
           } />
+          <Route path="/dashboard/maintenance/orders" element={
+            <ProtectedRoute>
+              <DashboardLayout>
+                <MaintenanceView />
+              </DashboardLayout>
+            </ProtectedRoute>
+          } />
 
           {/* Alerts Routes */}
           <Route path="/dashboard/alerts" element={
