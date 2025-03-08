@@ -54,22 +54,29 @@ const AboutUs = () => {
 
   const team = [
     {
-      name: "Sarah Chen",
+      name: "Brittany M",
       role: "CEO & Co-founder",
-      image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80",
-      bio: "Former Tesla executive with 15+ years in EV infrastructure"
+      image: "https://res.cloudinary.com/dork9pzwh/image/upload/v1741380844/1553956241140_mws5eq.jpg",
+      bio: "Real Estate Developer x EV Charging x Play Maker x Techstars Detroit"
     },
+    
     {
-      name: "Marcus Rodriguez",
+      name: "Michael Johnson",
       role: "CTO",
-      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80",
-      bio: "AI and machine learning expert, previously at Google"
+      image: "https://res.cloudinary.com/dork9pzwh/image/upload/v1741381100/professional-headshot_ozlqxg.jpg",
+      bio: "Former Tech Lead at Tesla | EV Infrastructure Expert | 15+ Years in Software Engineering"
     },
     {
-      name: "Dr. Emily Williams",
-      role: "Head of Innovation",
-      image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80",
-      bio: "PhD in Electrical Engineering, 20+ patents in charging technology"
+      name: "Tu Le",
+      role: "Adviser",
+      image: "https://res.cloudinary.com/dork9pzwh/image/upload/v1741380620/T0535GC8W5U-U05AXLN791P-fa761e1c0f51-512_rgjzzh.jpg",
+      bio: "Founder @ Sino Auto Insights | EIR - Mobility Innovation"
+    },
+    {
+      name: "Mack Hendricks",
+      role: "Adviser",
+      image: "https://res.cloudinary.com/dork9pzwh/image/upload/v1741380718/1710541636409_sl7sfl.jpg",
+      bio: "Entrepreneur | Voice Geek | Cloud Geek"
     }
   ];
 
@@ -188,7 +195,7 @@ const AboutUs = () => {
             </p>
           </motion.div>
 
-          <div className="mt-16 grid grid-cols-1 gap-12 md:grid-cols-3">
+          <div className="mt-16 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
             {team.map((member, index) => (
               <motion.div
                 key={member.name}
@@ -202,15 +209,15 @@ const AboutUs = () => {
                   <img
                     src={member.image}
                     alt={member.name}
-                    className="w-48 h-48 rounded-full mx-auto object-cover"
+                    className="w-40 h-40 rounded-full mx-auto object-cover"
                   />
                 </div>
-                <div className="mt-6">
+                <div className="mt-4">
                   <h3 className="text-xl font-semibold text-secondary-900">
                     {member.name}
                   </h3>
                   <p className="text-primary-600">{member.role}</p>
-                  <p className="mt-2 text-secondary-600">{member.bio}</p>
+                  <p className="mt-2 text-secondary-600 text-sm">{member.bio}</p>
                 </div>
               </motion.div>
             ))}
