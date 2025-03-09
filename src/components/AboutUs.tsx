@@ -61,10 +61,10 @@ const AboutUs = () => {
     },
     
     {
-      name: "Michael Johnson",
+      name: "Bryan Campbell",
       role: "CTO",
-      image: "https://res.cloudinary.com/dork9pzwh/image/upload/v1741381100/professional-headshot_ozlqxg.jpg",
-      bio: "Former Tech Lead at Tesla | EV Infrastructure Expert | 15+ Years in Software Engineering"
+      image: "https://res.cloudinary.com/dork9pzwh/image/upload/v1741521447/T07V759U268-U07V4H44951-a84ee3a93af4-192_femciv.jpg",
+      bio: "Founder X Big Tech, Visionary Technical Leader for Innovative Software Solutions"
     },
     {
       name: "Tu Le",
