@@ -13,25 +13,28 @@ import {
 const NewsMedia = () => {
   const newsItems = [
     {
-      title: "OptimizeEV Launches Revolutionary AI-Powered Predictive Maintenance",
+      title: "Meet OptimizeEV's Founder Brittany McGee",
       date: "March 1, 2024",
       category: "Product Launch",
-      image: "https://images.unsplash.com/photo-1696446702239-e76522785166?auto=format&fit=crop&q=80",
-      excerpt: "Leading EV charging management platform introduces groundbreaking AI technology for predictive maintenance, reducing downtime by up to 66%."
+      image: "https://res.cloudinary.com/dork9pzwh/image/upload/v1741622297/1c88bb3b-1b90-4ddd-8e3e-f5d9d7739dbe.png",
+      excerpt: "Meet Brittany McGee, Founder and Chief Executive Officer of OptimizeEV",
+      url: "https://michauto.org/meet-optimizeevs-founder-brittany-mcgee"
     },
     {
-      title: "Partnership Announcement: Major Fleet Operator Adopts OptimizeEV",
+      title: "Partnership with TechTown Detroit",
       date: "February 28, 2024",
       category: "Partnership",
-      image: "https://images.unsplash.com/photo-1697554401944-bea57cc38c19?auto=format&fit=crop&q=80",
-      excerpt: "One of North America's largest fleet operators selects OptimizeEV to manage their nationwide charging infrastructure."
+      image: "https://res.cloudinary.com/dork9pzwh/image/upload/v1741630727/9d2b1ae1-1d57-4ff3-8bd9-87dcef294b12.png",
+      excerpt: "I wouldn't be where I am without TechTown, says Brittany M., founder and CEO of OptimizeEV and 2022 Wayne State University alumna.McGee participated in our Start Studio Discovery and MVP programs",
+      url: "https://www.linkedin.com/posts/techtown_brittany-mcgee-optimizeev-activity-7254590926256250880-PSCu"
     },
     {
-      title: "OptimizeEV Named Top Innovator in EV Infrastructure",
+      title: "OptimizeEV | Detroit Smart Parking Lab",
       date: "February 15, 2024",
       category: "Award",
-      image: "https://images.unsplash.com/photo-1698675145323-0d8c837c4116?auto=format&fit=crop&q=80",
-      excerpt: "Industry recognition for revolutionary approach to EV charging station management and maintenance."
+      image: "https://res.cloudinary.com/dork9pzwh/image/upload/v1741629785/3b22c6df-5022-42bf-a6f0-f471db2920f9.png",
+      excerpt: "Monitor. Identify. Deploy. OptimizeEV is working to streamline the process for managing the operational performance of EV charging stations.",
+      url: "https://web.facebook.com/watch/?v=793584716181063"
     }
   ];
 
@@ -137,10 +140,15 @@ const NewsMedia = () => {
                     {item.title}
                   </h3>
                   <p className="text-secondary-600 mb-4">{item.excerpt}</p>
-                  <button className="text-primary-600 hover:text-primary-700 font-medium inline-flex items-center">
+                  <a 
+                    href={item.url} 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="text-primary-600 hover:text-primary-700 font-medium inline-flex items-center"
+                  >
                     Read More
                     <ArrowRight className="h-4 w-4 ml-1" />
-                  </button>
+                  </a>
                 </div>
               </motion.div>
             ))}
