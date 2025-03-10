@@ -4,6 +4,7 @@ import {
   Battery,
   Facebook,
   Twitter,
+  Instagram,
   Linkedin,
   Mail,
   Phone,
@@ -43,19 +44,19 @@ const Footer = () => {
               <div className="flex items-center">
                 <Mail className="h-5 w-5 text-primary-500 mr-2" />
                 <a href="mailto:contact@optimizeev.com" className="text-secondary-300 hover:text-white">
-                  contact@optimizeev.com
+                bmcgee@optimizeev.com
                 </a>
               </div>
               <div className="flex items-center">
                 <Phone className="h-5 w-5 text-primary-500 mr-2" />
                 <a href="tel:+1-555-123-4567" className="text-secondary-300 hover:text-white">
-                  +1 (555) 123-4567
+                  +1 (248) 331-6041
                 </a>
               </div>
               <div className="flex items-center">
                 <MapPin className="h-5 w-5 text-primary-500 mr-2" />
                 <span className="text-secondary-300">
-                  123 Innovation Drive, San Francisco, CA 94105
+                220 West Congress Street, Detroit, MI 48226
                 </span>
               </div>
             </div>
@@ -81,13 +82,13 @@ const Footer = () => {
         <div className="mt-12 pt-8 border-t border-secondary-700">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="flex space-x-6 mb-4 md:mb-0">
-              <a href="#" className="text-secondary-300 hover:text-white">
+              {/* <a href="#" className="text-secondary-300 hover:text-white">
                 <Facebook className="h-6 w-6" />
+              </a> */}
+              <a href="https://www.instagram.com/optimizeev/" target="_blank" rel="noopener noreferrer" className="text-secondary-300 hover:text-white">
+                <Instagram className="h-6 w-6" />
               </a>
-              <a href="#" className="text-secondary-300 hover:text-white">
-                <Twitter className="h-6 w-6" />
-              </a>
-              <a href="#" className="text-secondary-300 hover:text-white">
+              <a href="https://www.linkedin.com/company/optimizeevdetroit" target="_blank" rel="noopener noreferrer" className="text-secondary-300 hover:text-white">
                 <Linkedin className="h-6 w-6" />
               </a>
             </div>

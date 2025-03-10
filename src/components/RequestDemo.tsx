@@ -121,7 +121,7 @@ const RequestDemo = () => {
             </h2>
             
             <InlineWidget 
-              url="https://calendly.com/michael-xbigtech" 
+              url="https://calendly.com/optimizeev" 
               styles={{
                 height: '630px'
               }}

@@ -56,7 +56,7 @@ const AboutUs = () => {
     {
       name: "Brittany M",
       role: "CEO & Co-founder",
-      image: "https://res.cloudinary.com/dork9pzwh/image/upload/v1741380844/1553956241140_mws5eq.jpg",
+      image: "https://res.cloudinary.com/dork9pzwh/image/upload/v1741621973/_MG_7622_copy_2_uw2dde.jpg",
       bio: "Real Estate Developer x EV Charging x Play Maker x Techstars Detroit"
     },
     
